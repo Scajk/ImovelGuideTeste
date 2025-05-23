@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imóvel Guide</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="logo">Imóvel Guide</div>
+    <nav>
+      <div class="nav-group left">
+        <a href="#">Condomínios</a>
+        <a href="#">Fórum</a>
+        <a href="#">Guia</a>
+        <a href="#">Artigos</a>
+        <a href="#">Ferramentas</a>
+      </div>
+
+      <div class="nav-group right">
+        <a href="#">Cotar Imóvel</a>
+        <a href="#">Planos</a>
+        <a href="#">Entrar</a>
+        <button class="btn-cadastro">CADASTRE-SE</button>
+      </div>
+
+      <div class="menu-hamburguer" id="menu-hamburguer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </nav>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#">Condomínios</a>
+    <a href="#">Fórum</a>
+    <a href="#">Guia</a>
+    <a href="#">Artigos</a>
+    <a href="#">Ferramentas</a>
+    <a href="#">Cotar Imóvel</a>
+    <a href="#">Planos</a>
+    <a href="#">Entrar</a>
+    <button class="btn-cadastro">CADASTRE-SE</button>
+  </div>
+
+  <main class="container">
+    <div class="box">
+        <div class="conteudo1">
+            <div class="parte-superior">
+                <div class="img-wrapper mulher">
+                    <div class="img-blur"></div>
+                    <img src="Imagens/Mulher.jpg" alt="Corretora">
+                </div>
+                <div class="divisao-dados">
+                    <h1>Nome Corretora</h1>
+                    <h2>3.000 pontos</h2>
+                    <button class="ver-telefone" onclick="mostrarTelefone(this)">Ver Telefone</button>
+                <p class="telefone"></p>
+                </div>
+            </div>
+
+            <div class="parte-inferior">
+                <div class="img-wrapper homem">
+                    <img src="Imagens/Homem.jpeg" alt="">
+                </div>
+            <div class="divisao-dados">
+                <h1>Nome Corretor</h1>
+                <h2>1.260 pontos</h2>
+                <button class="ver-telefone" onclick="mostrarTelefone(this)">Ver Telefone</button>
+                <p class="telefone"></p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box mensagem">
+        <h2>Mande uma mensagem:</h2>
+            <input type="text" id="cpf" placeholder="Digite seu CPF">
+            <input type="text" id="telefone" placeholder="Digite seu telefone">
+            <textarea placeholder="Digite sua mensagem"></textarea>
+            <button class="enviar" onclick="enviado()">Enviar Mensagem</button>
+    </div>
+
+    <div class="box regra3">
+        <h3>Regra de 3</h3>
+        <div class="conteudo-regra3">
+        <input type="number" name="" id="numero1" placeholder="60">
+        <input type="number" name="" id="numero2" placeholder="100">
+        <input type="number" name="" id="numero3" placeholder="30">
+        <input type="number" name="" id="numero4">
+        <button class="enviar-calculo" onclick="calculo3()">Calcular</button>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="modal-imagem">
+            <img src="Imagens/13f4c1d74f5a76980b4e4300c26ee78c.jpg" alt="" id="imagem-casa">
+            <button class="abrir-imagem">ABRIR IMAGEM NO MODAL</button>
+        <div id="modal" class="modal">
+        <div class="modal-content">
+    <span class="fechar" onclick="fecharModal()">&times;</span>
+    <img src="Imagens/13f4c1d74f5a76980b4e4300c26ee78c.jpg" alt="Imagem em destaque">
+  </div>
+</div>
+        </div>
+    </div>
+
+    <div class="box" id="capture">
+        <img id="imagem-capturada" src="Imagens/13f4c1d74f5a76980b4e4300c26ee78c.jpg" alt="Imagem para capturar">
+        <button onclick="baixarImagem()" class="baixar-imagem">Download</button>
+    </div>
+    <div class="box">
+<div class="box zoom-box">
+  <div class="zoom-area">
+    <img src="Imagens/13f4c1d74f5a76980b4e4300c26ee78c.jpg" alt="Imagem para Zoom" id="zoom-img">
+  </div>
+</div>
+
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <nav class="footer-nav">
+        <div class="nav-group left">
+          <a href="#">Termos</a>
+          <a href="#">Contatos</a>
+          <a href="#">Sobre</a>
+        </div>
+        <div class="nav-group right">
+          Copyright 2022. Todos os direitos reservados.
+        </div>
+      </nav>
+      <div class="footer-logo">Imóvel Guide</div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/inputmask@5.0.8/dist/inputmask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script>
+    function mostrarTelefone(botao) {
+      const telefone = "(99) 99999-9999";
+      const telefoneEl = botao.nextElementSibling;
+      telefoneEl.textContent = telefone;
+      botao.style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const cpfInput = document.getElementById("cpf");
+      const telefoneInput = document.getElementById("telefone");
+
+      const cpfMask = new Inputmask("999.999.999-99");
+      const telefoneMask = new Inputmask("(99) 99999-9999");
+
+      cpfMask.mask(cpfInput);
+      telefoneMask.mask(telefoneInput);
+    });
+
+    function enviado(){
+      alert("Mensagem enviada com sucesso!")
+    }
+
+    function calculo3(){
+      var num1 = Number(document.getElementById("numero1").value)
+      var num2 = Number(document.getElementById("numero2").value)
+      var num3 = Number(document.getElementById("numero3").value)
+
+      var calculo = num1 * num2 / num3
+      document.getElementById("numero4").value = calculo
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const abrirBotao = document.querySelector(".abrir-imagem");
+
+      if (abrirBotao) {
+        abrirBotao.addEventListener("click", function () {
+          document.getElementById("modal").style.display = "flex";
+        });
+      }
+
+      window.addEventListener("click", function (event) {
+        const modal = document.getElementById("modal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    });
+
+    function fecharModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function baixarImagem(){
+        html2canvas(document.querySelector("#capture")).then(function(canvas) {
+
+            const link = document.createElement('a');
+            link.download = 'imagem_capturada.png';
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }).catch(function(error) {
+            alert("Erro ao capturar a imagem: " + error);
+        });
+    }
+
+    const hamburguerMenu = document.getElementById('menu-hamburguer');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburguerMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+});
+
+  </script>
+</body>
+</html>
